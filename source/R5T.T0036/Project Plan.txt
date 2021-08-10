@@ -1,4 +1,4 @@
-R5T.T0036 - IMethodName extension method base types library.
+R5T.T0036 - IMethodName and other code component extension method base types library.
 
 Goals
 
