@@ -7,47 +7,47 @@ namespace R5T.T0036.X003
     {
         public static int ClassTabCount(this IIndentation _)
         {
-            return IndentationValues.ClassTabCount;
+            return IndentationTabCounts.ClassTabCount;
         }
 
         public static int InterfaceOuterTabCount(this IIndentation _)
         {
-            return IndentationValues.InterfaceOuterTabCount;
+            return IndentationTabCounts.InterfaceOuterTabCount;
         }
 
         public static int MethodTabCount(this IIndentation _)
         {
-            return IndentationValues.MethodTabCount;
+            return IndentationTabCounts.MethodTabCount;
         }
 
         public static int MethodBodyTabCount(this IIndentation _)
         {
-            return IndentationValues.MethodBodyTabCount;
+            return IndentationTabCounts.MethodBodyTabCount;
         }
 
         public static int MethodParameterTabCount(this IIndentation _)
         {
-            return IndentationValues.MethodParameterTabCount;
+            return IndentationTabCounts.MethodParameterTabCount;
         }
 
         public static int NamespaceTabCount(this IIndentation _)
         {
-            return IndentationValues.NamespaceTabCount;
+            return IndentationTabCounts.NamespaceTabCount;
         }
 
         public static int NoneTabCount(this IIndentation _)
         {
-            return IndentationValues.NamespaceTabCount;
+            return IndentationTabCounts.NamespaceTabCount;
         }
 
         public static int ParameterTabCount(this IIndentation _)
         {
-            return IndentationValues.Parameter;
+            return IndentationTabCounts.Parameter;
         }
 
         public static int PropertyTabCount(this IIndentation _)
         {
-            return IndentationValues.PropertyTabCount;
+            return IndentationTabCounts.PropertyTabCount;
         }
     }
 }
