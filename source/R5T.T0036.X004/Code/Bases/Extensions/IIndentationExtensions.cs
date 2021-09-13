@@ -12,7 +12,16 @@ namespace System
 {
     public static class IIndentationExtensions
     {
+        /// <summary>
+        /// Initial indentation is just a new line.
+        /// </summary>
         public static SyntaxTriviaList Initial(this IIndentation _)
+        {
+            var output = _.NewLine();
+            return output;
+        }
+
+        public static SyntaxTriviaList NewLine(this IIndentation _)
         {
             var output = new SyntaxTriviaList()
                 .Add(Instances.SyntaxFactory.NewLine())
@@ -119,6 +128,14 @@ namespace System
         {
             // Assumes statements are in the body of methods.
             var output = indentation.MethodBody();
+            return output;
+        }
+
+        public static SyntaxTriviaList Type(this IIndentation indentation)
+        {
+            var tabCount = indentation.ClassTabCount();
+
+            var output = indentation.ByTabCount(tabCount);
             return output;
         }
 
