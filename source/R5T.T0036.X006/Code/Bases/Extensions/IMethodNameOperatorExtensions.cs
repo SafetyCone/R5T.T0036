@@ -4,6 +4,8 @@ using R5T.Magyar;
 
 using R5T.T0036;
 
+using Instances = R5T.T0036.X006.Instances;
+
 
 namespace System
 {
@@ -248,13 +250,35 @@ namespace System
 
             var firstToken = tokens[0];
 
-            var firstTokenIsExtensionParameterSignifier = firstToken == "this"; // TODO, using ISyntax extension.
+            var firstTokenIsExtensionParameterSignifier = firstToken == Instances.Syntax.This();
 
             var output = firstTokenIsExtensionParameterSignifier
                 ? hasFirstParameter
                 : WasFound.NotFound<string>()
                 ;
 
+            return output;
+        }
+
+        public static string GetExtensionParameter(this IMethodNameOperator _,
+            string parameterizedMethodName)
+        {
+            var hasExtensionParameter = _.HasExtensionParameter(parameterizedMethodName);
+
+            var output = hasExtensionParameter.GetOrExceptionIfNotFound($"No extension parameter found on parameterized method name:\n{parameterizedMethodName}");
+            return output;
+        }
+
+        public static string GetExtensionTypedMethodName(this IMethodNameOperator _,
+            string typedParameterizedExtensionMethodName)
+        {
+            var extensionParameter = _.GetExtensionParameter(typedParameterizedExtensionMethodName);
+
+            var extensionTypeName = Instances.ParameterNameOperator.GetExtensionTypeName(extensionParameter);
+
+            var methodName = _.GetMethodNameFromFullMethodName(typedParameterizedExtensionMethodName);
+
+            var output = $"{extensionTypeName}.{methodName}";
             return output;
         }
 
