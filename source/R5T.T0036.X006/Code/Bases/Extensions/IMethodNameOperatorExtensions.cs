@@ -47,11 +47,15 @@ namespace System
         {
             // The method name is between the last period and open-parenthesis.
             var indexOfFirstOpenParenthesis = _.GetIndexOfFirstOpenParenthesis(fullMethodName);
+            if (!StringHelper.IsFound(indexOfFirstOpenParenthesis))
+            {
+                throw new Exception($"Open parenthesis ('(') not found in full method name:\n{fullMethodName}");
+            }
 
-            var indexOfLastPeriod = fullMethodName.LastIndexOf(Characters.Period);
+            var indexOfLastPeriod = fullMethodName.LastIndexOf(Characters.Period, indexOfFirstOpenParenthesis);
             if(!StringHelper.IsFound(indexOfLastPeriod))
             {
-                throw new Exception($"Period not found in full method name:\n{fullMethodName}");
+                throw new Exception($"Period ('.') not found in full method name:\n{fullMethodName}");
             }
 
             var methodLength = indexOfFirstOpenParenthesis - 1 - indexOfLastPeriod;
