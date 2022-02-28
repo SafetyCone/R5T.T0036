@@ -52,13 +52,20 @@ namespace System
                 throw new Exception($"Open parenthesis ('(') not found in full method name:\n{fullMethodName}");
             }
 
+            var indexOfFirstOpenAngleBrace = _.GetIndexOfFirstOpenAngleBraceOrNotFound(fullMethodName);
+
+            var indexOfMethodNameStop = IndexHelper.IsFound(indexOfFirstOpenAngleBrace) && indexOfFirstOpenAngleBrace < indexOfFirstOpenParenthesis
+                ? indexOfFirstOpenAngleBrace
+                : indexOfFirstOpenParenthesis
+                ;
+
             var indexOfLastPeriod = fullMethodName.LastIndexOf(Characters.Period, indexOfFirstOpenParenthesis);
             if(!StringHelper.IsFound(indexOfLastPeriod))
             {
                 throw new Exception($"Period ('.') not found in full method name:\n{fullMethodName}");
             }
 
-            var methodLength = indexOfFirstOpenParenthesis - 1 - indexOfLastPeriod;
+            var methodLength = indexOfMethodNameStop - 1 - indexOfLastPeriod;
 
             var methodNameWithoutParentheses = fullMethodName.Substring(indexOfLastPeriod + 1, methodLength);
 
@@ -88,6 +95,13 @@ namespace System
             return output;
         }
 
+        public static int GetIndexOfFirstOpenAngleBraceOrNotFound(this IMethodNameOperator _,
+            string parameterizedMethodName)
+        {
+            var output = parameterizedMethodName.IndexOf(Characters.OpenAngleBrace);
+            return output;
+        }
+
         public static int GetIndexOfLastOpenParenthesis(this IMethodNameOperator _,
             string parameterizedMethodName)
         {
@@ -95,6 +109,19 @@ namespace System
             if (!StringHelper.IsFound(output))
             {
                 throw new Exception($"Open parenthesis not found in method name:\n{parameterizedMethodName}");
+            }
+
+            return output;
+        }
+
+        public static int GetIndexOfNextCloseParenthesis(this IMethodNameOperator _,
+            string parameterizedMethodName,
+            int startIndex)
+        {
+            var output = parameterizedMethodName.IndexOf(Characters.CloseParenthesis, startIndex);
+            if (!StringHelper.IsFound(output))
+            {
+                throw new Exception($"Close parenthesis not found in method name:\n{parameterizedMethodName}");
             }
 
             return output;
@@ -217,7 +244,7 @@ namespace System
             string parameterizedMethodName)
         {
             var indexOfOpenParenthesis = _.GetIndexOfFirstOpenParenthesis(parameterizedMethodName);
-            var indexOfNextCloseParenthesis = _.GetIndexOfLastCloseParenthesis(parameterizedMethodName);
+            var indexOfNextCloseParenthesis = _.GetIndexOfNextCloseParenthesis(parameterizedMethodName, indexOfOpenParenthesis);
 
             // Is there even a single parameter?
             if(indexOfNextCloseParenthesis == indexOfOpenParenthesis + 1)
@@ -227,12 +254,12 @@ namespace System
 
             // Get the first parameter.
             var indexOfFirstNextCommaOrNotFound = parameterizedMethodName.IndexOf(Characters.Comma, indexOfOpenParenthesis);
-            var indexOfFirstNextCommaOrLastIndex = StringHelper.IsFound(indexOfFirstNextCommaOrNotFound)
+            var indexOfFirstNextCommaOrNextCloseParenthesis = StringHelper.IsFound(indexOfFirstNextCommaOrNotFound)
                 ? indexOfFirstNextCommaOrNotFound
-                : StringHelper.LastIndex(parameterizedMethodName)
+                : indexOfNextCloseParenthesis
                 ;
 
-            var firstParameter = parameterizedMethodName.Substring(indexOfOpenParenthesis + 1, indexOfFirstNextCommaOrLastIndex - indexOfOpenParenthesis);
+            var firstParameter = parameterizedMethodName.Substring(indexOfOpenParenthesis + 1, indexOfFirstNextCommaOrNextCloseParenthesis - indexOfOpenParenthesis);
 
             var output = WasFound.From(firstParameter);
             return output;
