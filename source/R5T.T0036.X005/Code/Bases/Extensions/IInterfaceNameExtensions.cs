@@ -11,7 +11,7 @@ namespace System
     {
         public static string Interface1(this IInterfaceName _)
         {
-            return Instances.TypeName.Interface1();
+            return Instances.TypeName_Old.Interface1();
         }
     }
 }

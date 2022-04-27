@@ -11,17 +11,17 @@ namespace System
     {
         public static string Class1(this IClassName _)
         {
-            return Instances.TypeName.Class1();
+            return Instances.TypeName_Old.Class1();
         }
 
         public static string Program(this IClassName _)
         {
-            return Instances.TypeName.Program();
+            return Instances.TypeName_Old.Program();
         }
 
         public static string Startup(this IClassName _)
         {
-            return Instances.TypeName.Startup();
+            return Instances.TypeName_Old.Startup();
         }
     }
 }
