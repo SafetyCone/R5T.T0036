@@ -1,4 +1,0 @@
-R5T.T0036.X001 - IMethodName extensions for Microsoft-related method names.
-
-Goals
-

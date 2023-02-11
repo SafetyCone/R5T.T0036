@@ -3,6 +3,7 @@
 
 namespace R5T.T0036.X003
 {
+    [Obsolete("See R5T.Z0002.ITabCounts")]
     public static class IndentationTabCounts
     {
         public static int ClassTabCount => 1;

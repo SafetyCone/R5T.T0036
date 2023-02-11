@@ -1,4 +1,0 @@
-R5T.T0036.X003 - Indentation and simple code component extensions for common values (like ITypeParameterName.T()).
-
-Goals
-

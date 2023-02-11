@@ -9,6 +9,7 @@ using Instances = R5T.T0036.X006.Instances;
 
 namespace System
 {
+    [Obsolete("See R5T.F0104.IMethodNameOperator")]
     public static class IMethodNameOperatorExtensions
     {
         public static string GetTypedMethodName(this IMethodNameOperator _,

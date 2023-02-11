@@ -8,6 +8,7 @@ namespace System
 {
     public static class IMethodNameExtensions
     {
+        [Obsolete("See R5T.Z0027.IMethodNames")]
         public static string Main(this IMethodName _)
         {
             return MethodNames.Main;

@@ -7,6 +7,7 @@ using Instances = R5T.T0036.X005.Instances;
 
 namespace System
 {
+    [Obsolete("See R5T.Z0027.ClassNames")]
     public static class IClassNameExtensions
     {
         public static string Class1(this IClassName _)

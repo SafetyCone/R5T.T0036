@@ -7,6 +7,7 @@ using Instances = R5T.T0036.X006.Instances;
 
 namespace System
 {
+    [Obsolete("See R5T.F0104.IPropertyNameOperator")]
     public static class IPropertyNameExtensions
     {
         public static string GetPropertyNameForTypeName(this IPropertyName _,

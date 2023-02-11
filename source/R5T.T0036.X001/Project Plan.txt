@@ -1,4 +1,0 @@
-R5T.T0036.X001 - IMethodName and other code component extensions for System-related names.
-
-Goals
-

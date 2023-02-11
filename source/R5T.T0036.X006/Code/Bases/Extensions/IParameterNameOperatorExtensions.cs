@@ -9,6 +9,7 @@ using Instances = R5T.T0036.X006.Instances;
 
 namespace System
 {
+    [Obsolete("See R5T.F0104.IParameterNameOperator")]
     public static class IParameterNameOperatorExtensions
     {
         public static string GetExtensionTypeName(this IParameterNameOperator _,
